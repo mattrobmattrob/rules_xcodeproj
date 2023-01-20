@@ -7,7 +7,7 @@ load(
 )
 
 def _get_file(target):
-    if AppleBundleInfo in target:
+    if AppleBundleInfo in target and getattr(target[AppleBundleInfo], "infoplist", None):
         return target[AppleBundleInfo].infoplist
     elif AppleBinaryInfo in target:
         return getattr(target[AppleBinaryInfo], "infoplist", None)

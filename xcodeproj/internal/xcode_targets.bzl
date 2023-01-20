@@ -867,6 +867,7 @@ def _product_to_dto(product):
         "additional_paths": [
             file_path_to_dto(normalized_file_path(file))
             for file in product._additional_files.to_list()
+            if file
         ],
         "executable_name": product.executable_name,
         "is_resource_bundle": product._is_resource_bundle,

@@ -110,12 +110,18 @@ def process_top_level_properties(
         elif product_type.startswith("com.apple.product-type.framework"):
             # Some rules only set the binary for static frameworks
             bundle_file = bundle_info.binary
-            bundle_path = bundle_file.dirname
-            archive_file_path = file_path(
-                bundle_file,
-                path = bundle_path,
-            )
-            bundle_file_path = archive_file_path
+
+            if bundle_file:
+                bundle_path = bundle_file.dirname
+                archive_file_path = file_path(
+                    bundle_file,
+                    path = bundle_path,
+                )
+                bundle_file_path = archive_file_path
+            else:
+                bundle_path = None
+                bundle_file_path = None
+                archive_file_path = None
         else:
             fail("`AppleBundleInfo.archive` not set for {}".format(target_name))
 

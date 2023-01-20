@@ -281,10 +281,11 @@ targets.
         if build_mode == "bazel":
             product = xcode_target.product
             for file in product.framework_files.to_list():
-                linker_products_map[build_setting_path(
-                    file = file,
-                    path = file.dirname,
-                )] = build_setting_path(file = product.file)
+                if product.file:
+                    linker_products_map[build_setting_path(
+                        file = file,
+                        path = file.dirname,
+                    )] = build_setting_path(file = product.file)
 
         label = replacement_labels.get(
             xcode_target.id,
